@@ -7,7 +7,11 @@
 
 ## Quick Start
 
+To view the lecture click on https://neighbours-in-the-night-sky.onrender.com/ and it will open the lecture on a browser tab .
+
 Because the entire interactive lecture—including styles, scripts, seeded synthetic datasets, and the 240-star catalogue—is bundled inside `index.html`, no build step, bundler, or local server is required:
+
+follow the process to run it locally on your device 
 
 1. Download `index.html` to any computer, tablet, or phone.
 2. Open `index.html` directly in any modern browser (Chrome, Firefox, Edge, Safari).
