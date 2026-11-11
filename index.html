@@ -1558,12 +1558,12 @@
         </div>
 
         <p>In machine learning, each measurable property of an item—like a fruit's weight or a star's temperature—is called a measurement column <span class="gloss">(feature)</span>. Each individual item in your table is a single data row <span class="gloss">(sample or point)</span>.</p>
-        <p>If we measure two features (weight and sweetness), we can plot every fruit on a flat 2D sheet. Add a third feature (crunchiness) and the points float inside a 3D box you can turn with your hand. In geometric space, real data forms recognisable shapes: parallel stripes <span class="gloss">(bands)</span>, a circle surrounded by a loop <span class="gloss">(rings)</span>, or separate pockets <span class="gloss">(islands)</span>. As you will see in Tool 5B, a single straight dividing line <span class="gloss">(linear classifier)</span> works on two clean groups, but fails on stripes, rings, and multi-pocket islands.</p>
+        <p>If we measure two features (weight and sweetness), we can plot every fruit on a flat 2D sheet. Add a third feature (crunchiness) and the points float inside a 3D box you can turn with your hand. In geometric space, real data forms recognisable shapes: parallel stripes <span class="gloss">(bands)</span>, a circle surrounded by a loop <span class="gloss">(rings)</span>, or separate pockets <span class="gloss">(islands)</span>. As you will see in Tool 6, a single straight dividing line <span class="gloss">(linear classifier)</span> works on two clean groups, but fails on stripes, rings, and multi-pocket islands.</p>
 
         <!-- TOOL 5A -->
         <div class="tool p2 wide-bleed" id="tool-5a">
           <div class="tool-head">
-            <span>Tool 5A · What is data space? (24 fruits)</span>
+            <span>Tool 5 · What is data space? (24 fruits)</span>
             <span>Click any point · Drag to rotate in 3D</span>
           </div>
           <div class="tool-try">
@@ -1609,35 +1609,38 @@
           </div>
         </div>
 
-        <!-- TOOL 5B -->
+        <!-- TOOL 6 (formerly 5B) -->
         <div class="tool p2 wide-bleed" id="tool-5b">
           <div class="tool-head">
-            <span>Tool 5B · Bands, rings, islands</span>
+            <span>Tool 6 · Bands, rings, islands</span>
             <span>200 points · Straight line vs K=5 neighbours</span>
           </div>
           <div class="tool-try">
-            <strong>Try this</strong>Drag the two round handles on the straight line to get the highest split score you can on Rings or Islands—then click "Try the neighbour method".
+            <strong>Try this</strong>Drag handles A and B on the straight line to get the highest split score you can on Bands, Rings, or Islands—then click "Try the neighbour method (K = 5)" to switch views cleanly.
           </div>
           <div class="tool-controls">
             <div class="ctrl-group" role="group" aria-label="Dataset shape selector">
-              <span style="font-weight:600;">Dataset shape:</span>
+              <span style="font-weight:600;">1. Shape:</span>
               <button type="button" class="btn t5b-ds-btn active" data-ds="bands" aria-pressed="true">Bands</button>
               <button type="button" class="btn t5b-ds-btn" data-ds="rings" aria-pressed="false">Rings</button>
               <button type="button" class="btn t5b-ds-btn" data-ds="islands" aria-pressed="false">Islands (2 per colour)</button>
               <button type="button" class="btn t5b-ds-btn" data-ds="easy" aria-pressed="false">Separated islands</button>
             </div>
-            <div class="ctrl-group">
+            <div class="ctrl-group" role="group" aria-label="Classifier method toggle">
+              <span style="font-weight:600;">2. Method:</span>
+              <button type="button" class="btn active" id="t5b-line-btn" aria-pressed="true">Straight line (drag A &amp; B)</button>
               <button type="button" class="btn" id="t5b-knn-btn" aria-pressed="false" style="border-color:var(--teal);color:var(--teal);">Try the neighbour method (K = 5)</button>
             </div>
           </div>
           <div class="tool-stage">
             <div class="canvas-wrap" style="border:1px solid var(--rule); background:var(--paper);">
-              <canvas id="t5b-canvas" height="290" aria-label="200 data points with draggable straight dividing line and optional K-NN decision regions"></canvas>
+              <canvas id="t5b-canvas" height="300" aria-label="200 data points comparing a draggable straight dividing line against K-NN decision regions"></canvas>
             </div>
           </div>
           <div class="tool-readout" aria-live="polite" id="t5b-readout">
+            <span class="readout-item"><strong>Active view:</strong> <span id="t5b-ro-mode">Straight line</span></span>
             <span class="readout-item"><strong>Straight-line split score:</strong> <span id="t5b-ro-line">66.5%</span></span>
-            <span class="readout-item"><strong>Neighbour method (K=5 leave-one-out):</strong> <span id="t5b-ro-knn">Click button to test</span></span>
+            <span class="readout-item"><strong>Neighbour method (K=5) score:</strong> <span id="t5b-ro-knn">98.5%</span></span>
           </div>
           <div class="tool-saw" aria-live="polite" id="t5b-saw">
             <strong>What you just saw:</strong> A single straight line cannot wrap around rings, stripes, or alternating islands, whereas checking local neighbours adapts to the shape of the data.
@@ -1676,7 +1679,7 @@
         <!-- TOOL 6 -->
         <div class="tool p2 wide-bleed" id="tool-6">
           <div class="tool-head">
-            <span>Tool 6 · Distance shapes explorer</span>
+            <span>Tool 7 · Distance shapes explorer</span>
             <span>Drag point B · Compare Circle, Diamond &amp; Square</span>
           </div>
           <div class="tool-try">
@@ -1747,7 +1750,7 @@
         <!-- TOOL 7 -->
         <div class="tool p2 wide-bleed" id="tool-7">
           <div class="tool-head">
-            <span>Tool 7 · Click-to-classify K-NN</span>
+            <span>Tool 8 · Click-to-classify K-NN</span>
             <span>60 training points · Click or drag query point</span>
           </div>
           <div class="tool-try">
@@ -1762,9 +1765,9 @@
             <div class="ctrl-group">
               <label for="t7-metric">Metric:</label>
               <select id="t7-metric" class="ctrl-select">
-                <option value="euclidean">Euclidean (Straight)</option>
-                <option value="manhattan">Manhattan (Grid)</option>
-                <option value="chebyshev">Chebyshev (King)</option>
+                <option value="euclidean">Euclidean</option>
+                <option value="manhattan">Manhattan</option>
+                <option value="chebyshev">Chebyshev</option>
               </select>
             </div>
             <div class="ctrl-group">
@@ -1824,7 +1827,7 @@
         <!-- TOOL 8 -->
         <div class="tool p2 wide-bleed" id="tool-8">
           <div class="tool-head">
-            <span>Tool 8 · How to choose K (Overfitting vs Underfitting)</span>
+            <span>Tool 9 · How to choose K (Overfitting vs Underfitting)</span>
             <span>70/30 Train/Test Split · ~10% Label Noise</span>
           </div>
           <div class="tool-try">
@@ -1889,7 +1892,7 @@
         <!-- TOOL 9 (FINALE) -->
         <div class="tool p3 wide-bleed" id="tool-9">
           <div class="tool-head">
-            <span>Tool 9 · Mystery star classifier (Finale · 240 stars)</span>
+            <span>Tool 10 · Mystery star classifier (Finale · 240 stars)</span>
             <span>Drag the glowing ✚ Mystery Star anywhere</span>
           </div>
           <div class="tool-try">
@@ -1973,7 +1976,7 @@
         <!-- TOOL 10 -->
         <div class="tool p3 wide-bleed" id="tool-10">
           <div class="tool-head">
-            <span>Tool 10 · Code it yourself (Full Python notebook · 4 cells)</span>
+            <span>Tool 11 · Code it yourself (Full Python notebook · 4 cells)</span>
             <span>240 stars · HR plot + 4 features · K = 3</span>
           </div>
           <div class="tool-try">
@@ -2160,7 +2163,7 @@ weighted avg       0.97      0.97      0.97        60</pre>
                   <div style="font-family:var(--font-sans); font-size:0.76rem; text-align:center; color:#4A5163; margin-top:0.35rem;">Predicted Label (0–5) · Blues colormap</div>
                 </div>
                 <p style="margin:0.65rem 0 0 0; font-family:var(--font-sans); color:#F8E3A1; font-weight:600;">
-                  The only mistakes were between types 3 and 4. Look at <a href="#tool-9" style="color:#79C0FF;">Tool 9</a>: those groups sit close together.
+                  The only mistakes were between types 3 and 4. Look at <a href="#tool-9" style="color:#79C0FF;">Tool 10</a>: those groups sit close together.
                 </p>
               </div>
             </div>
@@ -2397,6 +2400,7 @@ weighted avg       0.97      0.97      0.97        60</pre>
         }
         const ctx = canvas.getContext("2d");
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
         return { ctx, w, h, dpr };
       }
 
@@ -3755,11 +3759,17 @@ const STAR_DATA = [
       }
 
       const T5B_SETS = buildT5BDatasets();
+      const T5B_DEFAULT_HANDLES = {
+        bands:   { h1: { x: 0.16, y: 0.24 }, h2: { x: 0.84, y: 0.76 } },
+        rings:   { h1: { x: 0.18, y: 0.50 }, h2: { x: 0.82, y: 0.50 } },
+        islands: { h1: { x: 0.20, y: 0.20 }, h2: { x: 0.80, y: 0.80 } },
+        easy:    { h1: { x: 0.50, y: 0.15 }, h2: { x: 0.50, y: 0.85 } }
+      };
       const t5bState = {
         ds: "bands",
         showKNN: false,
-        h1: { x: 0.15, y: 0.22 },
-        h2: { x: 0.85, y: 0.78 },
+        h1: { x: 0.16, y: 0.24 },
+        h2: { x: 0.84, y: 0.76 },
         dragHandle: null
       };
 
@@ -3793,20 +3803,41 @@ const STAR_DATA = [
         easy: computeLOOScore(T5B_SETS.easy, 5)
       };
 
+      function setT5BMode(useKNN) {
+        t5bState.showKNN = useKNN;
+        const lineBtn = document.getElementById("t5b-line-btn");
+        const knnBtn = document.getElementById("t5b-knn-btn");
+        if (lineBtn && knnBtn) {
+          lineBtn.classList.toggle("active", !useKNN);
+          lineBtn.setAttribute("aria-pressed", !useKNN ? "true" : "false");
+          knnBtn.classList.toggle("active", useKNN);
+          knnBtn.setAttribute("aria-pressed", useKNN ? "true" : "false");
+          knnBtn.style.background = useKNN ? "var(--teal)" : "";
+          knnBtn.style.color = useKNN ? "#fff" : "var(--teal)";
+        }
+        drawTool5B();
+      }
+
       function drawTool5B() {
         const canvas = document.getElementById("t5b-canvas");
         if (!canvas) return;
-        const { ctx, w, h } = setupCanvas(canvas, 290);
+        const { ctx, w, h } = setupCanvas(canvas, 300);
+
+        // Always wipe entire stage cleanly with opaque paper colour first
+        ctx.fillStyle = "#FAFAF6";
+        ctx.fillRect(0, 0, w, h);
+
         const pts = T5B_SETS[t5bState.ds];
         const lineRes = computeLineScore(pts, t5bState.h1, t5bState.h2);
 
-        // Background shading (either K-NN regions or linear half-planes)
-        const step = 7;
+        // Paint decision regions cleanly (either K=5 neighbour regions OR straight-line half-planes, never stacked)
+        const step = 6;
         const vx = t5bState.h2.x - t5bState.h1.x;
         const vy = t5bState.h2.y - t5bState.h1.y;
         for (let py = 0; py < h; py += step) {
           for (let px = 0; px < w; px += step) {
-            const nx = px / w, ny = py / h;
+            const nx = (px + step * 0.5) / w;
+            const ny = (py + step * 0.5) / h;
             let cls;
             if (t5bState.showKNN) {
               cls = knn(pts, { x: nx, y: ny }, 5, "euclidean").winner;
@@ -3815,94 +3846,128 @@ const STAR_DATA = [
               const side = cross >= 0 ? 1 : 0;
               cls = lineRes.flip ? 1 - side : side;
             }
-            ctx.fillStyle = cls === 0 ? "rgba(59, 82, 139, 0.13)" : "rgba(184, 88, 42, 0.13)";
+            ctx.fillStyle = cls === 0 ? "#E4E9F5" : "#F6E7DF";
             ctx.fillRect(px, py, step, step);
           }
         }
 
-        // Draw extended straight line connecting h1 and h2
-        const dx = t5bState.h2.x - t5bState.h1.x;
-        const dy = t5bState.h2.y - t5bState.h1.y;
-        ctx.save();
-        ctx.strokeStyle = t5bState.showKNN ? "rgba(26,31,46,0.35)" : "#1A1F2E";
-        ctx.lineWidth = 2.2;
-        ctx.setLineDash([6, 4]);
-        ctx.beginPath();
-        ctx.moveTo((t5bState.h1.x - dx * 3) * w, (t5bState.h1.y - dy * 3) * h);
-        ctx.lineTo((t5bState.h1.x + dx * 3) * w, (t5bState.h1.y + dy * 3) * h);
-        ctx.stroke();
-        ctx.restore();
+        // Subtle coordinate grid so the plane feels crisp
+        ctx.strokeStyle = "rgba(26, 31, 46, 0.06)";
+        ctx.lineWidth = 1;
+        for (let gx = 0.2; gx < 1.0; gx += 0.2) {
+          ctx.beginPath(); ctx.moveTo(gx * w, 0); ctx.lineTo(gx * w, h); ctx.stroke();
+        }
+        for (let gy = 0.25; gy < 1.0; gy += 0.25) {
+          ctx.beginPath(); ctx.moveTo(0, gy * h); ctx.lineTo(w, gy * h); ctx.stroke();
+        }
 
-        // Draw 200 points
+        // Draw the 200 data points
         pts.forEach(p => {
           const x = p.x * w, y = p.y * h;
           ctx.fillStyle = p.cls === 0 ? "#3B528B" : "#B8582A";
           ctx.strokeStyle = "#FFFFFF";
-          ctx.lineWidth = 1;
-          drawMarkerShape(ctx, p.cls === 0 ? "circle" : "triangle", x, y, 4.3);
+          ctx.lineWidth = 1.1;
+          drawMarkerShape(ctx, p.cls === 0 ? "circle" : "triangle", x, y, 4.4);
           ctx.fill();
           ctx.stroke();
         });
 
-        // Draw draggable handles h1 and h2
-        [t5bState.h1, t5bState.h2].forEach((hdl, i) => {
-          const hx = hdl.x * w, hy = hdl.y * h;
-          ctx.fillStyle = "#FFFFFF";
-          ctx.strokeStyle = "#4A1E5C";
+        // In Straight-Line mode, draw the extended dividing line and draggable handles A & B
+        if (!t5bState.showKNN) {
+          const dx = t5bState.h2.x - t5bState.h1.x;
+          const dy = t5bState.h2.y - t5bState.h1.y;
+          ctx.save();
+          ctx.strokeStyle = "#1A1F2E";
           ctx.lineWidth = 2.5;
+          ctx.setLineDash([7, 5]);
           ctx.beginPath();
-          ctx.arc(hx, hy, 9, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo((t5bState.h1.x - dx * 4) * w, (t5bState.h1.y - dy * 4) * h);
+          ctx.lineTo((t5bState.h1.x + dx * 4) * w, (t5bState.h1.y + dy * 4) * h);
           ctx.stroke();
-          ctx.fillStyle = "#4A1E5C";
-          ctx.font = "700 10px 'Bricolage Grotesque', sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText(i === 0 ? "A" : "B", hx, hy + 3.5);
-        });
+          ctx.restore();
 
+          [t5bState.h1, t5bState.h2].forEach((hdl, i) => {
+            const hx = hdl.x * w, hy = hdl.y * h;
+            ctx.fillStyle = "#FFFFFF";
+            ctx.strokeStyle = "#4A1E5C";
+            ctx.lineWidth = 2.6;
+            ctx.beginPath();
+            ctx.arc(hx, hy, 11, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = "#4A1E5C";
+            ctx.font = "700 11px 'Bricolage Grotesque', sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(i === 0 ? "A" : "B", hx, hy + 4);
+          });
+        }
+
+        // Top-left floating status pill inside the canvas for instant clarity
+        const pillText = t5bState.showKNN
+          ? `Neighbour method (K = 5) · Score: ${T5B_LOO_CACHE[t5bState.ds]}% (drag A/B disabled — click 'Straight line' to drag)`
+          : `Straight-line split · Score: ${lineRes.pct}% (drag handles A or B to move line)`;
+        ctx.font = "600 11.5px 'Bricolage Grotesque', sans-serif";
+        const tw = ctx.measureText(pillText).width;
+        ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
+        ctx.strokeStyle = "#D9DCD4";
+        ctx.lineWidth = 1;
+        ctx.fillRect(10, 10, Math.min(w - 20, tw + 20), 26);
+        ctx.strokeRect(10, 10, Math.min(w - 20, tw + 20), 26);
+        ctx.fillStyle = "#1A1F2E";
+        ctx.textAlign = "left";
+        ctx.fillText(pillText, 20, 27);
+
+        document.getElementById("t5b-ro-mode").textContent = t5bState.showKNN
+          ? "Neighbour method (K = 5 decision regions)"
+          : "Straight line (draggable handles A & B)";
         document.getElementById("t5b-ro-line").textContent = lineRes.pct + "%";
-        document.getElementById("t5b-ro-knn").textContent = t5bState.showKNN
-          ? T5B_LOO_CACHE[t5bState.ds] + "% (active on plot)"
-          : T5B_LOO_CACHE[t5bState.ds] + "% (click button to paint regions)";
+        document.getElementById("t5b-ro-knn").textContent = T5B_LOO_CACHE[t5bState.ds] + "%";
 
         const saw = document.getElementById("t5b-saw");
         if (t5bState.showKNN) {
-          saw.innerHTML = `<strong>What you just saw:</strong> Painting each spot by its 5 nearest neighbours wraps around ${t5bState.ds} and achieves ${T5B_LOO_CACHE[t5bState.ds]}% leave-one-out accuracy (vs ${lineRes.pct}% for the straight line).`;
+          saw.innerHTML = `<strong>What you just saw:</strong> Painting each region by its 5 nearest neighbours cleanly wraps around the "${t5bState.ds}" shape and scores ${T5B_LOO_CACHE[t5bState.ds]}% (compared to ${lineRes.pct}% for the straight line).`;
         } else {
-          saw.innerHTML = `<strong>What you just saw:</strong> On "${t5bState.ds}", your straight line gets ${lineRes.pct}% right—click "Try the neighbour method" to see K = 5 reach ${T5B_LOO_CACHE[t5bState.ds]}%.`;
+          saw.innerHTML = `<strong>What you just saw:</strong> On "${t5bState.ds}", your straight line gets ${lineRes.pct}% right—click "Try the neighbour method (K = 5)" to switch views and see K = 5 reach ${T5B_LOO_CACHE[t5bState.ds]}%.`;
         }
       }
 
       document.querySelectorAll(".t5b-ds-btn").forEach(btn => {
         btn.addEventListener("click", function() {
-          t5bState.ds = this.getAttribute("data-ds");
+          const newDs = this.getAttribute("data-ds");
+          t5bState.ds = newDs;
+          const def = T5B_DEFAULT_HANDLES[newDs] || T5B_DEFAULT_HANDLES.bands;
+          t5bState.h1 = { x: def.h1.x, y: def.h1.y };
+          t5bState.h2 = { x: def.h2.x, y: def.h2.y };
           document.querySelectorAll(".t5b-ds-btn").forEach(b => {
             const act = b === this;
             b.classList.toggle("active", act);
             b.setAttribute("aria-pressed", act ? "true" : "false");
           });
-          drawTool5B();
+          setT5BMode(false);
         });
       });
 
+      document.getElementById("t5b-line-btn").addEventListener("click", function() {
+        setT5BMode(false);
+      });
+
       document.getElementById("t5b-knn-btn").addEventListener("click", function() {
-        t5bState.showKNN = !t5bState.showKNN;
-        this.classList.toggle("active", t5bState.showKNN);
-        this.setAttribute("aria-pressed", t5bState.showKNN ? "true" : "false");
-        this.textContent = t5bState.showKNN ? "Showing neighbour regions (K = 5)" : "Try the neighbour method (K = 5)";
-        drawTool5B();
+        setT5BMode(!t5bState.showKNN);
       });
 
       makeDraggable(document.getElementById("t5b-canvas"), function(type, p) {
-        const nx = Math.max(0.05, Math.min(0.95, p.x / p.w));
-        const ny = Math.max(0.05, Math.min(0.95, p.y / p.h));
+        const nx = Math.max(0.06, Math.min(0.94, p.x / p.w));
+        const ny = Math.max(0.12, Math.min(0.94, p.y / p.h));
         if (type === "down") {
+          if (t5bState.showKNN) {
+            setT5BMode(false);
+          }
           const d1 = Math.hypot(nx - t5bState.h1.x, ny - t5bState.h1.y);
           const d2 = Math.hypot(nx - t5bState.h2.x, ny - t5bState.h2.y);
           t5bState.dragHandle = d1 <= d2 ? "h1" : "h2";
           t5bState[t5bState.dragHandle] = { x: nx, y: ny };
           drawTool5B();
-        } else if (type === "drag" && t5bState.dragHandle) {
+        } else if (type === "drag" && t5bState.dragHandle && !t5bState.showKNN) {
           t5bState[t5bState.dragHandle] = { x: nx, y: ny };
           drawTool5B();
         } else if (type === "up") {
@@ -3936,41 +4001,48 @@ const STAR_DATA = [
           return { x: cx + gx * unit, y: cy - gy * unit };
         }
 
-        // Optional 8x8 chessboard overlay centered on A
+        // Optional chessboard overlay with the (0,0) square centered directly on A
         if (t6State.chess) {
           for (let row = -4; row < 4; row++) {
             for (let col = -4; col < 4; col++) {
-              const p0 = toScreen(col, row + 1);
-              const isDark = (row + col) % 2 !== 0;
-              ctx.fillStyle = isDark ? "rgba(59, 82, 139, 0.14)" : "rgba(241, 243, 238, 0.7)";
+              // Center square (col, row) on coordinate (col, row), so top-left is (col - 0.5, row + 0.5)
+              const p0 = toScreen(col - 0.5, row + 0.5);
+              const isDark = ((row + col) % 2 + 2) % 2 !== 0;
+              ctx.fillStyle = isDark ? "rgba(59, 82, 139, 0.15)" : "rgba(241, 243, 238, 0.85)";
               ctx.fillRect(p0.x, p0.y, unit, unit);
+              ctx.strokeStyle = "rgba(59, 82, 139, 0.22)";
+              ctx.lineWidth = 1;
+              ctx.strokeRect(p0.x, p0.y, unit, unit);
 
-              // Show king distance numbers on squares
-              const sx = col + 0.5, sy = row + 0.5;
-              const kMoves = t6State.metric === "manhattan"
-                ? Math.round(Math.abs( col ) + Math.abs( row ))
-                : Math.round(Math.max(Math.abs( col ), Math.abs( row )));
-              ctx.fillStyle = "rgba(26, 31, 46, 0.42)";
-              ctx.font = "600 10px 'Bricolage Grotesque', sans-serif";
-              ctx.textAlign = "center";
-              ctx.fillText(kMoves + "", p0.x + unit / 2, p0.y + unit / 2 + 3);
+              // Show king distance numbers at the center of each square (skip 0 since A badge sits right there)
+              if (col !== 0 || row !== 0) {
+                const kMoves = t6State.metric === "manhattan"
+                  ? Math.round(Math.abs(col) + Math.abs(row))
+                  : (t6State.metric === "chebyshev"
+                      ? Math.round(Math.max(Math.abs(col), Math.abs(row)))
+                      : Math.hypot(col, row).toFixed(1));
+                ctx.fillStyle = "rgba(26, 31, 46, 0.55)";
+                ctx.font = "600 10.5px 'Bricolage Grotesque', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(kMoves + "", p0.x + unit / 2, p0.y + unit / 2 + 3.5);
+              }
             }
           }
+        } else {
+          // Coordinate grid (-5 to +5) when chessboard is OFF
+          ctx.strokeStyle = "#E6E8E1";
+          ctx.lineWidth = 1;
+          for (let g = -5; g <= 5; g++) {
+            const sx = cx + g * unit;
+            ctx.beginPath(); ctx.moveTo(sx, 10); ctx.lineTo(sx, h - 10); ctx.stroke();
+            const sy = cy - g * unit;
+            ctx.beginPath(); ctx.moveTo(10, sy); ctx.lineTo(w - 10, sy); ctx.stroke();
+          }
+          ctx.strokeStyle = "#D9DCD4";
+          ctx.lineWidth = 1.5;
+          ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, h - 10); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w - 10, cy); ctx.stroke();
         }
-
-        // Coordinate grid (-5 to +5)
-        ctx.strokeStyle = "#E6E8E1";
-        ctx.lineWidth = 1;
-        for (let g = -5; g <= 5; g++) {
-          const sx = cx + g * unit;
-          ctx.beginPath(); ctx.moveTo(sx, 10); ctx.lineTo(sx, h - 10); ctx.stroke();
-          const sy = cy - g * unit;
-          ctx.beginPath(); ctx.moveTo(10, sy); ctx.lineTo(w - 10, sy); ctx.stroke();
-        }
-        ctx.strokeStyle = "#D9DCD4";
-        ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, h - 10); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w - 10, cy); ctx.stroke();
 
         // Draw equidistant shape of radius r around A(0,0)
         const rPx = t6State.r * unit;
@@ -4077,6 +4149,10 @@ const STAR_DATA = [
 
       document.getElementById("t6-board-btn").addEventListener("click", function() {
         t6State.chess = !t6State.chess;
+        if (t6State.chess) {
+          t6State.B.x = Math.max(-4, Math.min(3, Math.round(t6State.B.x)));
+          t6State.B.y = Math.max(-4, Math.min(3, Math.round(t6State.B.y)));
+        }
         this.classList.toggle("active", t6State.chess);
         this.setAttribute("aria-pressed", t6State.chess ? "true" : "false");
         this.textContent = "8×8 Chessboard overlay: " + (t6State.chess ? "ON" : "OFF");
@@ -4087,10 +4163,17 @@ const STAR_DATA = [
         if (type === "down" || type === "drag") {
           const cx = p.w / 2, cy = p.h / 2;
           const unit = Math.min(p.w, p.h) / 11.2;
-          const gx = Math.round(((p.x - cx) / unit) * 2) / 2;
-          const gy = Math.round(((cy - p.y) / unit) * 2) / 2;
-          t6State.B.x = Math.max(-4.5, Math.min(4.5, gx));
-          t6State.B.y = Math.max(-4.5, Math.min(4.5, gy));
+          if (t6State.chess) {
+            const gx = Math.round((p.x - cx) / unit);
+            const gy = Math.round((cy - p.y) / unit);
+            t6State.B.x = Math.max(-4, Math.min(3, gx));
+            t6State.B.y = Math.max(-4, Math.min(3, gy));
+          } else {
+            const gx = Math.round(((p.x - cx) / unit) * 2) / 2;
+            const gy = Math.round(((cy - p.y) / unit) * 2) / 2;
+            t6State.B.x = Math.max(-4.5, Math.min(4.5, gx));
+            t6State.B.y = Math.max(-4.5, Math.min(4.5, gy));
+          }
           drawTool6();
         }
       });
